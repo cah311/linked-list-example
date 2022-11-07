@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Node(data, number, next) {
+        this.data = data;
+        this.next = next;
+        this.number = number + 1;
+      }
+      function LinkedList() {
+        const head = new Node('head', 0);
+
+        const append = (value) => {
+          let temp = head;
+          while (temp.next != undefined) temp = temp.next;
+          temp.next = new Node(value, temp.number);
+        };
+
+        const prepend = (value) => {
+          let nextNode = head.next;
+          let newNode = new Node(value, 1, nextNode);
+          head.next = newNode;
+          nextNode = newNode.next;
+          while (nextNode != undefined) {
+            nextNode.number = nextNode.number + 1;
+            nextNode = nextNode.next;
+          }
+        };
+
+        const size = () => {
+          let temp = head;
+          while (temp.next != undefined) temp = temp.next;
+          return console.log(`Number of nodes: ${temp.number}`);
+        };
+
+        return { head, append, prepend, size };
+      }
+    </script>
+  </body>
+</html>
