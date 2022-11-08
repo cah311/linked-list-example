@@ -21,6 +21,7 @@
           this.size = 0;
         }
 
+        // add to end of list
         append(value) {
           if (this.head == null) {
             this.head = new Node(value, this.head);
@@ -32,17 +33,20 @@
           this.size++;
         }
 
+        // add to start of list
         prepend(value) {
           this.head = new Node(value, this.head);
           this.size++;
         }
 
+        // returns node at end of list
         tail() {
           let temp = this.head;
           while (temp.next != undefined) temp = temp.next;
           return temp;
         }
 
+        // returns node at index
         at(index) {
           let temp = this.head;
           for (let i = 1; i != index; i++) {
@@ -51,6 +55,7 @@
           return temp;
         }
 
+        // removes node at end of list
         pop() {
           let prev = null;
           let temp = this.head;
@@ -62,6 +67,7 @@
           this.size--;
         }
 
+        // confirms if value is in list
         contains(value) {
           let temp = this.head;
           while (temp.data != undefined) {
@@ -74,6 +80,7 @@
           return false;
         }
 
+        // finds value at index
         find(value) {
           let temp = this.head;
           let index = 1;
@@ -81,6 +88,63 @@
             temp = temp.next;
           }
           return console.log(`${value} is at index: ${index}`);
+        }
+
+        // returns nodes as strings
+        toString() {
+          let temp = this.head;
+          let size = this.size;
+          for (let i = 0; i <= size; i++) {
+            if (temp == undefined) return console.log('null');
+            console.log(temp.data);
+            temp = temp.next;
+          }
+        }
+
+        // insert new node at index
+        insertAt(value, index) {
+          let prev = null;
+          let temp = this.head;
+          let i = 1;
+
+          if (index == 1) {
+            this.head = new Node(value, this.head);
+            this.size++;
+            return;
+          }
+
+          while (i != index) {
+            prev = temp;
+            temp = temp.next;
+            i++;
+          }
+          let newTarget = temp;
+          let newNode = new Node(value, newTarget);
+          prev.next = newNode;
+          this.size++;
+        }
+
+        // removes node at index
+        removeAt(index) {
+          let prev = null;
+          let temp = this.head;
+          let i = 1;
+
+          if (index == 1) {
+            this.head = temp.next;
+            this.size--;
+            return;
+          }
+
+          while (i != index) {
+            if (temp.next == undefined) return (prev.next = undefined);
+
+            prev = temp;
+            temp = temp.next;
+            i++;
+          }
+          prev.next = temp.next;
+          this.size--;
         }
       }
 
